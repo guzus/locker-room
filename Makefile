@@ -1,5 +1,4 @@
-deploy:
-	forge create
+include .env
 
-add-code:
-	forge send
+deploy:
+	forge script DeployScript --rpc-url ${RPC_URL} --verify --broadcast --legacy
