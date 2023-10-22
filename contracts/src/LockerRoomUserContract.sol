@@ -1,8 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-contract LockerRoomUserContract {
+contract LockerRoomUserContract is Ownable {
     address public lockerRoom;
+
+    constructor(address _lockerRoom) {
+        lockerRoom = _lockerRoom;
+    }
 
     function callByCode(uint8 code) {
         bytes memory data = LockerRoom(lockerRoom).getCalldata(code);
@@ -14,12 +18,17 @@ contract LockerRoomUserContract {
         address(this).delegatecall(abi.encodePacked(data, suffix));
     }
 
-    // acccess only by admin is heavily recommended
-    function updateLockerRoom(address newLockerRoom) {
+    function someFunction(uint256 a, uint256 b, address c, bytes calldata d) {
+        // do something
+    }
+
+    // only accessible by admin is heavily recommended
+
+    function updateLockerRoom(address newLockerRoom) onlyOwner {
         lockerRoom = newLockerRoom;
     }
 
-    function someFunction(uint256 a, uint256 b, address c, bytes calldata d) {
-        // do something
+    function addCode(uint8 code, bytes calldata data) onlyOwner {
+        LockerRoom(lockerRoom).registerCalldata(code, data);
     }
 }
