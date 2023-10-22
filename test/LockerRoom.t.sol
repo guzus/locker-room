@@ -17,12 +17,12 @@ contract LockerRoomTest is Test {
     }
 
     function testCallByRawCalldata() public {
-        // TODO: call with regular user
+        vm.prank(0x0000000000000000000000000000000000000000);
         lockerRoomUserContract.someFunction(1, 2, address(this), bytes("gm"));
     }
 
     function testCallByCode() public {
-        // TODO: call with regular user
+        vm.prank(0x0000000000000000000000000000000000000000);
         lockerRoomUserContract.callByCode(1);
     }
 }

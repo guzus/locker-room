@@ -25,7 +25,7 @@ contract LockerRoomUserContract is Owned {
         // do something
     }
 
-    // only accessible by admin is heavily recommended
+    // only accessible by admin
 
     function updateLockerRoom(address newLockerRoom) external onlyOwner {
         lockerRoom = LockerRoom(newLockerRoom);
